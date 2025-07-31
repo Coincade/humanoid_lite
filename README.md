@@ -23,7 +23,7 @@ A lightweight humanoid robot simulation and reinforcement learning framework for
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Coincade/humanoid_lite.git
 cd humanoid_lite
 ```
 
