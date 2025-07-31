@@ -62,6 +62,9 @@ pip install isaaclab[isaacsim,all]==2.1.0 --extra-index-url https://pypi.nvidia.
 
 Install the project packages in development mode:
 ```bash
+# Install required packages
+pip install -r requirements.txt
+
 # Install humanoid_lite package
 cd source/humanoid_lite
 pip install -e .
