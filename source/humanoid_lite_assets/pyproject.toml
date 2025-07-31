@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "humanoid_lite_assets"
+version = "2025.05.28"
+description = "Description files for Humanoid Lite"
+authors = [
+    { name = "Yash KVR" },
+]
+maintainers = [
+    { name = "Yash KVR" },
+]
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+keywords = ["robotics", "isaaclab"]
+classifiers = [
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.10",
+    "Isaac Sim :: 4.5.0",
+]
+dependencies = [
+    "psutil",
+]
+
+[tool.setuptools]
+packages = ["humanoid_lite_assets"]
+zip-safe = false
