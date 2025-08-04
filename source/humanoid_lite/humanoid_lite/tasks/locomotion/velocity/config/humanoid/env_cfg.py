@@ -166,7 +166,7 @@ class RewardsCfg:
         func=mdp.feet_air_time_positive_biped,
         params={
             "command_name": "base_velocity",
-            "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*_ankle_roll"),
+            "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*_ankle_link"),
             "threshold": 0.5,
         },
         weight=2.0,
@@ -175,8 +175,8 @@ class RewardsCfg:
     feet_slide = RewTerm(
         func=mdp.feet_slide,
         params={
-            "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*_ankle_roll"),
-            "asset_cfg": SceneEntityCfg("robot", body_names=".*_ankle_roll"),
+            "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*_ankle_link"),
+            "asset_cfg": SceneEntityCfg("robot", body_names=".*_ankle_link"),
         },
         weight=-0.1,
     )
@@ -185,7 +185,7 @@ class RewardsCfg:
     undesired_contacts = RewTerm(
         func=mdp.undesired_contacts,
         params={
-            "sensor_cfg": SceneEntityCfg("contact_forces", body_names=["base", ".*_hip_.*", ".*_knee_.*", ".*_shoulder_.*", ".*_elbow_.*"]),
+            "sensor_cfg": SceneEntityCfg("contact_forces", body_names=["base_link", ".*_hip_.*_link", ".*_knee_link", ".*_shoulder_.*_link", ".*_elbow_link"]),
             "threshold": 1.0,
         },
         weight=-1.0,
@@ -197,9 +197,9 @@ class RewardsCfg:
         params={"asset_cfg": SceneEntityCfg("robot", joint_names=[".*_hip_yaw_joint", ".*_hip_roll_joint"])},
         weight=-1.0,
     )
-    joint_deviation_ankle_roll = RewTerm(
+    joint_deviation_ankle = RewTerm(
         func=mdp.joint_deviation_l1,
-        params={"asset_cfg": SceneEntityCfg("robot", joint_names=[".*_ankle_roll_joint"])},
+        params={"asset_cfg": SceneEntityCfg("robot", joint_names=[".*_ankle_joint"])},
         weight=-1.0,
     )
     joint_deviation_shoulder = RewTerm(
@@ -209,7 +209,7 @@ class RewardsCfg:
     )
     joint_deviation_elbow = RewTerm(
         func=mdp.joint_deviation_l1,
-        params={"asset_cfg": SceneEntityCfg("robot", joint_names=[".*_elbow_pitch_joint", ".*_elbow_roll_joint"])},
+        params={"asset_cfg": SceneEntityCfg("robot", joint_names=[".*_elbow_joint"])},
         weight=-1.0,
     )
 
@@ -224,7 +224,7 @@ class TerminationsCfg:
     )
     base_orientation = DoneTerm(
         func=mdp.bad_orientation,
-        params={"limit_angle": 0.78, "asset_cfg": SceneEntityCfg("robot", body_names="base")},
+        params={"limit_angle": 0.78, "asset_cfg": SceneEntityCfg("robot", body_names="base_link")},
     )
 
 
@@ -247,7 +247,7 @@ class EventsCfg:
     add_base_mass = EventTerm(
         func=mdp.randomize_rigid_body_mass,
         params={
-            "asset_cfg": SceneEntityCfg("robot", body_names="base"),
+            "asset_cfg": SceneEntityCfg("robot", body_names="base_link"),
             "mass_distribution_params": (-1.0, 2.0),
             "operation": "add",
         },
@@ -300,7 +300,7 @@ class EventsCfg:
     base_external_force_torque = EventTerm(
         func=mdp.apply_external_force_torque,
         params={
-            "asset_cfg": SceneEntityCfg("robot", body_names="base"),
+            "asset_cfg": SceneEntityCfg("robot", body_names="base_link"),
             "force_range": (-2.0, 2.0),
             "torque_range": (-2.0, 2.0),
         },
