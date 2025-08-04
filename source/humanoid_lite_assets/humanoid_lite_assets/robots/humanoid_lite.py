@@ -6,32 +6,31 @@ from isaaclab.assets.articulation import ArticulationCfg
 
 ISAACLAB_ASSET_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "data"))
 
-HUMANOID_LITE_LEG_JOINTS = [
-    "leg_left_hip_roll_joint",
-    "leg_left_hip_yaw_joint",
-    "leg_left_hip_pitch_joint",
-    "leg_left_knee_pitch_joint",
-    "leg_left_ankle_pitch_joint",
-    "leg_left_ankle_roll_joint",
-    "leg_right_hip_roll_joint",
-    "leg_right_hip_yaw_joint",
-    "leg_right_hip_pitch_joint",
-    "leg_right_knee_pitch_joint",
-    "leg_right_ankle_pitch_joint",
-    "leg_right_ankle_roll_joint",
-]
-
+# Updated joint lists based on the new robot structure
 HUMANOID_LITE_ARM_JOINTS = [
     "arm_left_shoulder_pitch_joint",
-    "arm_left_shoulder_roll_joint",
+    "arm_left_shoulder_roll_joint", 
     "arm_left_shoulder_yaw_joint",
-    "arm_left_elbow_pitch_joint",
-    "arm_left_elbow_roll_joint",
+    "arm_left_elbow_joint",
+    "arm_left_wrist_joint",
     "arm_right_shoulder_pitch_joint",
     "arm_right_shoulder_roll_joint",
-    "arm_right_shoulder_yaw_joint",
-    "arm_right_elbow_pitch_joint",
-    "arm_right_elbow_roll_joint",
+    "arm_right_shoulder_yaw_joint", 
+    "arm_right_elbow_joint",
+    "arm_right_wrist_joint",
+]
+
+HUMANOID_LITE_LEG_JOINTS = [
+    "leg_left_hip_pitch_joint",
+    "leg_left_hip_roll_joint",
+    "leg_left_hip_yaw_joint", 
+    "leg_left_knee_joint",
+    "leg_left_ankle_joint",
+    "leg_right_hip_pitch_joint",
+    "leg_right_hip_roll_joint",
+    "leg_right_hip_yaw_joint",
+    "leg_right_knee_joint", 
+    "leg_right_ankle_joint",
 ]
 
 HUMANOID_LITE_JOINTS = HUMANOID_LITE_ARM_JOINTS + HUMANOID_LITE_LEG_JOINTS
@@ -55,30 +54,30 @@ HUMANOID_LITE_CFG = ArticulationCfg(
         ),
     ),
     init_state=ArticulationCfg.InitialStateCfg(
-        pos=(0.0, 0.0, 0.0),
+        pos=(0.0, 0.0, 0.5),  # Raised spawn height to prevent spawning below ground
         joint_pos={
+            # Arm joints - updated to match new structure
             "arm_left_shoulder_pitch_joint": 0.0,
             "arm_left_shoulder_roll_joint": 0.0,
             "arm_left_shoulder_yaw_joint": 0.0,
-            "arm_left_elbow_pitch_joint": 0.0,
-            "arm_left_elbow_roll_joint": 0.0,
+            "arm_left_elbow_joint": 0.0,
+            "arm_left_wrist_joint": 0.0,
             "arm_right_shoulder_pitch_joint": 0.0,
             "arm_right_shoulder_roll_joint": 0.0,
             "arm_right_shoulder_yaw_joint": 0.0,
-            "arm_right_elbow_pitch_joint": 0.0,
-            "arm_right_elbow_roll_joint": 0.0,
-            "leg_left_hip_roll_joint": 0.0,
+            "arm_right_elbow_joint": 0.0,
+            "arm_right_wrist_joint": 0.0,
+            # Leg joints - updated to match new structure
+            "leg_left_hip_pitch_joint": 0.0,
+            "leg_left_hip_roll_joint": 0.0,  
             "leg_left_hip_yaw_joint": 0.0,
-            "leg_left_hip_pitch_joint": -0.2,
-            "leg_left_knee_pitch_joint": 0.4,
-            "leg_left_ankle_pitch_joint": -0.3,
-            "leg_left_ankle_roll_joint": 0.0,
+            "leg_left_knee_joint": 0.0,
+            "leg_left_ankle_joint": 0.0,
+            "leg_right_hip_pitch_joint": 0.0,
             "leg_right_hip_roll_joint": 0.0,
             "leg_right_hip_yaw_joint": 0.0,
-            "leg_right_hip_pitch_joint": -0.2,
-            "leg_right_knee_pitch_joint": 0.4,
-            "leg_right_ankle_pitch_joint": -0.3,
-            "leg_right_ankle_roll_joint": 0.0,
+            "leg_right_knee_joint": 0.0,
+            "leg_right_ankle_joint": 0.0,
         },
         joint_vel={".*": 0.0},
     ),
@@ -89,8 +88,8 @@ HUMANOID_LITE_CFG = ArticulationCfg(
                 "arm_.*_shoulder_pitch_joint",
                 "arm_.*_shoulder_roll_joint",
                 "arm_.*_shoulder_yaw_joint",
-                "arm_.*_elbow_pitch_joint",
-                "arm_.*_elbow_roll_joint",
+                "arm_.*_elbow_joint",
+                "arm_.*_wrist_joint",
             ],
             effort_limit=4,
             velocity_limit=10.0,
@@ -103,7 +102,7 @@ HUMANOID_LITE_CFG = ArticulationCfg(
                 "leg_.*_hip_yaw_joint",
                 "leg_.*_hip_roll_joint",
                 "leg_.*_hip_pitch_joint",
-                "leg_.*_knee_pitch_joint",
+                "leg_.*_knee_joint",
             ],
             effort_limit=6,
             velocity_limit=10.0,
@@ -113,8 +112,7 @@ HUMANOID_LITE_CFG = ArticulationCfg(
         ),
         "ankles": ImplicitActuatorCfg(
             joint_names_expr=[
-                "leg_.*_ankle_pitch_joint",
-                "leg_.*_ankle_roll_joint",
+                "leg_.*_ankle_joint",
             ],
             effort_limit=6,
             velocity_limit=10.0,
