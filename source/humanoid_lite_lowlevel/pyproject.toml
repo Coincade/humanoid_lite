@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "humanoid_lite_lowlevel"
+version = "2025.05.28"
+description = "Low-level control for Humanoid Lite"
+authors = [
+    { name = "yashkvr" },
+]
+maintainers = [
+    { name = "yashkvr" },
+]
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+keywords = ["robotics", "lowlevel"]
+classifiers = [
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.10",
+]
+dependencies = [
+    "psutil",
+]
+
+[tool.setuptools]
+packages = ["humanoid_lite_lowlevel"]
+zip-safe = false
