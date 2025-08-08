@@ -279,12 +279,10 @@ mlruns/
 tensorboard_logs/
 
 # Data files
-data/
 datasets/
+meshes/
 *.csv
 *.json
-*.xml
-*.yaml
 *.yml
 
 # ROS/ROS2
@@ -313,10 +311,6 @@ data/usd/config.yaml
 # Isaac Sim specific
 isaac-sim/
 .isaac-sim/
-
-# Mujoco
-*.mjcf
-*.xml
 
 # Gazebo
 .gazebo/
